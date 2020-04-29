@@ -1,6 +1,30 @@
+const today = new Date();
+const date = today.getDate();
+
+const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+
+const shuffle = ([...array]) => {
+  for (let i = array.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+const fs = require('fs');
+const defaultFlexMessage = fs.readFileSync('flex-message.default.json','utf8');
+
+let flexMessage = defaultFlexMessage.replace('00', date);
+
+for( let i = 1; i >= 39; i++) {
+  flexMessage = flexMessage.replace(i + "?", shuffle[i])
+};
+
+fs.writeFileSync("flex-message.json", flexMessage);
+
+
 // -----------------------------------------------------------------------------
 // モジュールのインポート
-const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
 
 // -----------------------------------------------------------------------------
@@ -11,41 +35,17 @@ const line_config = {
 };
 
 // -----------------------------------------------------------------------------
-// Webサーバー設定
-server.listen(process.env.PORT || 3000);
-
-// -----------------------------------------------------------------------------
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
 // -----------------------------------------------------------------------------
 // ルーター設定
-server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
-    // 先行してLINE側にステータスコード200でレスポンスする。
-    res.sendStatus(200);
+const fs = require('fs');
+const flexMessage = fs.readFileSync("flex-message.json",'utf8');
 
-    // すべてのイベント処理のプロミスを格納する配列。
-    let events_processed = [];
+const message = FlexSendMessage.new_from_json_dict(flexMessage);
 
-// イベントオブジェクトを順次処理。
-    req.body.events.forEach((event) => {
-        // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
-        if (event.type == "message" && event.message.type == "text"){
-            // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            if (event.message.text == "こんにちは"){
-                // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "これはこれは"
-                }));
-            }
-        }
-    });
-
-    // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
-    Promise.all(events_processed).then(
-        (response) => {
-            console.log(`${response.length} event(s) processed.`);
-        }
-    );
-});
+bot.broadcast([
+  type: "flex",
+  text: message
+])
