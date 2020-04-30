@@ -49,10 +49,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           type: "flex",
           altText: "席替えの結果",
           contents:{
-          flexMessage()));
+          flexMessage();
         }
-      }
-    }
+      }))
+    };
   };
 
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
