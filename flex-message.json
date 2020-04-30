@@ -1,7 +1,4 @@
 {
-  "type": "flex",
-  "altText": "席替えの結果",
-  "contents":{
     "type": "bubble",
     "size": "giga",
     "body": {
@@ -468,5 +465,4 @@
         }
       ]
     }
-  }
 }
