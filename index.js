@@ -1,5 +1,5 @@
 //change.jsのfunctionをインポート
-const f = require('./change');
+const flexMessage() = require('./change');
 
 // -----------------------------------------------------------------------------
 // モジュールのインポート
@@ -45,7 +45,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     //ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
     if (messageObj.word_list.some(value => value === event.message.text)){
 
-      f().then((flexMessageObj) => {
+      flexMessage().then((flexMessageObj) => {
         //replyMessage()で返信し、そのプロミスをevents_processedに追加
         return events_processed.push(bot.replyMessage(event.replyToken, flexMessageObj));
       });
