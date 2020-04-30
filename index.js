@@ -4,7 +4,7 @@ const date = today.getDate() + "";//Stringで扱う
 
 // -----------------------------------------------------------------------------
 //change.jsのfunctionをインポート
-const flexMessage(date) = require('./change')
+let flexMessage(date) = require('./change')
 
 // -----------------------------------------------------------------------------
 // モジュールのインポート
