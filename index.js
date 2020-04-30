@@ -45,7 +45,7 @@ changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
 // -----------------------------------------------------------------------------
 //一斉送信用のflex messageをjsonファイルから読み込む
 const fs = require('fs');
-let json = fs.readFileSync('flex-message.json', 'utf8');
+let json = fs.readFileSync('http://seatchange.herokuapp.com/flex-message.json', 'utf8');
 
 // -----------------------------------------------------------------------------
 //席替えの結果と日付に合わせてflex messageを書き換え、オブジェクトとして取得
@@ -91,7 +91,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定
     if (event.type == "message" && event.message.type == "text"){
-      json = fs.readFile('again-message.json', 'utf8');
+      json = fs.readFile('http://seatchange.herokuapp.com/again-message.json', 'utf8');
       const jsonText
       const messageObj = JSON.parse(jsonText);
       // ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
