@@ -1,468 +1,472 @@
 {
-  "type": "bubble",
-  "size": "giga",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "00日の座席",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
-        "type": "box",
-        "layout": "horizontal",
-        "spacing": "none",
-        "offsetTop": "md",
-        "contents": [
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "1?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "2?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "3?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "4?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "5?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "6?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "7?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "8?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "9?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "10?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "11?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "12?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "13?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "14?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "15?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "16?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "17?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "18?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "19?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "20?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "21?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "22?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "23?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "24?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "25?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "26?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "27?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "28?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "29?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "30?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "31?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "32?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "33?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "paddingStart": "md",
-            "paddingEnd": "md",
-            "spacing": "md",
-            "contents": [
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "34?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "35?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "36?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "37?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "38?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              },
-              {
-                "type": "text",
-                "text": "39?",
-                "align": "center",
-                "gravity": "center"
-              },
-              {
-                "type": "separator"
-              }
-            ]
-          },
-          {
-            "type": "separator"
-          }
-        ]
-      }
-    ]
+  "type": "flex",
+  "altText": "席替えの結果",
+  "contents":{
+    "type": "bubble",
+    "size": "giga",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "0?日の座席",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "spacing": "none",
+          "offsetTop": "md",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "1?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "2?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "3?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "4?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "5?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "6?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "7?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "8?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "9?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "10?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "11?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "12?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "13?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "14?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "15?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "16?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "17?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "18?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "19?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "20?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "21?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "22?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "23?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "24?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "25?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "26?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "27?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "28?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "29?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "30?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "31?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "32?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "33?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "paddingStart": "md",
+              "paddingEnd": "md",
+              "spacing": "md",
+              "contents": [
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "34?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "35?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "36?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "37?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "38?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                },
+                {
+                  "type": "text",
+                  "text": "39?",
+                  "align": "center",
+                  "gravity": "center"
+                },
+                {
+                  "type": "separator"
+                }
+              ]
+            },
+            {
+              "type": "separator"
+            }
+          ]
+        }
+      ]
+    }
   }
 }
