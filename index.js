@@ -1,5 +1,5 @@
 //change.jsのfunctionをインポート
-const flexMessage() = require('./change');
+const flexMessage = require('./change');
 
 // -----------------------------------------------------------------------------
 // モジュールのインポート
