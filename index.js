@@ -1,10 +1,5 @@
 //change.jsのfunctionをインポート
-let flexMessage = require('./change');
-
-// -----------------------------------------------------------------------------
-//今日の日付を取得。前日に席替えするなら日付＋１
-const today = new Date();
-const date = today.getDate() + "";//Stringで扱う
+const flexMessage = require('./change');
 
 // -----------------------------------------------------------------------------
 // モジュールのインポート
@@ -44,17 +39,22 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   const messageObj = JSON.parse(jsonText);
 
-    // イベントオブジェクトを順次処理。
-  req.body.events.forEach((event) => {
+    // イベント処理
+  function handleEvent(event) {
 
-    if (event.type === "message" && event.message.type === "text"){// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定
+    //ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
+    if (messageObj.word_list.some(value => value === event.message.text)){
 
-      if (messageObj.word_list.some(value => value === event.message.text)){// ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
-        events_processed.push(bot.replyMessage(event.replyToken, flexMessage(date).then(flexMessageObj)));
-        // replyMessage()で返信し、そのプロミスをevents_processedに追加
-      }
+      //今日の日付を取得。Stringで扱う
+      const today = new Date();
+      const date = today.getDate() + "";
+
+      flexMessage(date).then((flexMessageObj) => {
+        //replyMessage()で返信し、そのプロミスをevents_processedに追加
+        return events_processed.push(bot.replyMessage(event.replyToken, flexMessageObj));
+      });
     }
-  });
+  };
 
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
   Promise.all(events_processed).then(
