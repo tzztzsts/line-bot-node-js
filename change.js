@@ -50,9 +50,8 @@ let flexMessageObj = JSON.parse(json);
 
 // -----------------------------------------------------------------------------
 //席替えの結果と日付に合わせてflex messageを書き換え。ついでにモジュール化
-function flexMessage = () => {
+const flexMessage = () => {
 
-  return new Promise((resolve) => {
     //今日の日付を取得。Stringで扱う
     const today = new Date();
     const date = today.getDate() + "";
@@ -61,11 +60,8 @@ function flexMessage = () => {
 
     for (i = 1; i <= 39; i++) {
       flexMessageObj.replace("{{number}}", "" + changedSeats[i - 1]);
-    }
-
-    resolve(flexMessageObj);
-
-  });
+  }
+  console.log(flexMessageObj);
 };
 
-module.exprts = flexMessage();
+module.exprts = flexMessage;
