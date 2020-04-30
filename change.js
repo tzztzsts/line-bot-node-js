@@ -35,33 +35,4 @@ const changedSeats = (temporarySeats1, selected, temporarySeats2) => {
   return temporarySeats1;
 };
 
-changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
-
-// -----------------------------------------------------------------------------
-//一斉送信用のflex messageをjsonファイルから読み込み、オブジェクトとして扱う
-const fs = require('fs');
-const json = fs.readFileSync('./flex-message.json', 'utf8', (error, data) => {
-  if (error) {
-    return;
-  }
-  console.log(data);
-});
-let flexMessageObj = JSON.parse(json);
-
-// -----------------------------------------------------------------------------
-//席替えの結果と日付に合わせてflex messageを書き換え。ついでにモジュール化
-const flexMessage = () => {
-
-    //今日の日付を取得。Stringで扱う
-    const today = new Date();
-    const date = today.getDate() + "";
-
-    flexMessageObj.replace("{{day}}", date);
-
-    for (i = 1; i <= 39; i++) {
-      flexMessageObj.replace("{{number}}", "" + changedSeats[i - 1]);
-  }
-  console.log(flexMessageObj);
-};
-
-module.exprts = flexMessage;
+module.exports = changed => changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了。モジュールとしてエクスポート
