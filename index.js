@@ -42,8 +42,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     // イベント処理
   function handleEvent(event) {
 
-    //ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
-    if (messageObj.word_list.some(value => value === event.message.text)){
+    //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
+    if (messageObj.word_list.some(value => event.message.text.match(value))){
         //replyMessage()で返信し、そのプロミスをevents_processedに追加
         return events_processed.push(bot.replyMessage(event.replyToken, {
           type: "flex",
