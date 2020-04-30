@@ -44,7 +44,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
     //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
     if (messageObj.word_list.some(value => event.message.text.match(value))){
-      const sendMessage = JSON.stringify(flexMessage)
+      const sendMessage = JSON.stringify(flexMessage);
       //replyMessage()で返信し、そのプロミスをevents_processedに追加
       events_processed.push(bot.replyMessage(event.replyToken, {
         type: "flex",
