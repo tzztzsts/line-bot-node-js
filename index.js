@@ -1,10 +1,10 @@
+//change.jsのfunctionをインポート
+let flexMessage = require('./change');
+
+// -----------------------------------------------------------------------------
 //今日の日付を取得。前日に席替えするなら日付＋１
 const today = new Date();
 const date = today.getDate() + "";//Stringで扱う
-
-// -----------------------------------------------------------------------------
-//change.jsのfunctionをインポート
-let flexMessage(date) = require('./change')
 
 // -----------------------------------------------------------------------------
 // モジュールのインポート
@@ -50,7 +50,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     if (event.type === "message" && event.message.type === "text"){// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定
 
       if (messageObj.word_list.some(value => value === event.message.text)){// ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
-        events_processed.push(bot.replyMessage(event.replyToken, flexMessage);
+        events_processed.push(bot.replyMessage(event.replyToken, flexMessage(date));
         // replyMessage()で返信し、そのプロミスをevents_processedに追加
       }
     }

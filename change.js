@@ -52,10 +52,15 @@ let flexMessageObj = JSON.parse(json);
 //席替えの結果と日付に合わせてflex messageを書き換え。ついでにモジュール化
 module.exprts = function(date){
 
-  flexMessageObj.replace("{{day}}", date);
+  return new Promise((resolve) => {
 
-  for (i = 1; i <= 39; i++) {
-    flexMessageObj.replace("{{number}}", "" + changedSeats[i - 1]);
-  }
-  return flexMessageObj;
+    flexMessageObj.replace("{{day}}", date);
+
+    for (i = 1; i <= 39; i++) {
+      flexMessageObj.replace("{{number}}", "" + changedSeats[i - 1]);
+    }
+
+    resolve(flexMessageObj);
+
+  });
 };
