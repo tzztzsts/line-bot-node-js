@@ -50,4 +50,5 @@ Promise.all(events_processed).then(
   (response) => {
     console.log(`${response.length} event(s) processed.`);
   }
-);
+)
+});
