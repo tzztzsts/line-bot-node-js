@@ -48,9 +48,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         return events_processed.push(bot.replyMessage(event.replyToken, {
           type: "flex",
           altText: "席替えの結果",
-          contents:{
+          contents:
           flexMessage()
-        }
       }));
     };
   };
