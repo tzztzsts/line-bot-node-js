@@ -43,6 +43,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     }
     console.log(data);
   });
+
   const messageObj = JSON.parse(jsonText);
 
     // イベントオブジェクトを順次処理。
@@ -50,7 +51,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
     if (event.type === "message" && event.message.type === "text"){// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定
 
-      if (messageObj.some(value => value === event.message.text)){// ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
+      if (messageObj.word_list.some(value => value === event.message.text)){// ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
         events_processed.push(bot.replyMessage(event.replyToken, flexMessage(date)));
         // replyMessage()で返信し、そのプロミスをevents_processedに追加
       }
