@@ -37,7 +37,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
 
   const fs = require('fs');
-  const jsonText = fs.readFile('./again-message.json', 'utf8', (error, data) => {
+  const jsonText = fs.readFileSync('./again-message.json', 'utf8', (error, data) => {
     if (error) {
       return;
     }
