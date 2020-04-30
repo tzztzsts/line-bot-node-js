@@ -36,7 +36,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
 
-  const jsonText = /*fs.readFile('./again-message', 'utf8')*/require('./again-message.json');
+  const jsonText = fs.readFile('./again-message.json', 'utf8');
   const messageObj = JSON.parse(jsonText);
 
     // イベントオブジェクトを順次処理。

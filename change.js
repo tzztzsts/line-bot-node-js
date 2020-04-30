@@ -39,8 +39,8 @@ changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
 
 // -----------------------------------------------------------------------------
 //一斉送信用のflex messageをjsonファイルから読み込み、オブジェクトとして扱う
-//const fs = require('fs');
-const json = require('./flex-message.json'/*, 'utf8'*/);
+const fs = require('fs');
+const json = fs.readFileSync('./flex-message.json', 'utf8');
 let flexMessageObj = JSON.parse(json);
 
 // -----------------------------------------------------------------------------
