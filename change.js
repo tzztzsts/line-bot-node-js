@@ -50,7 +50,7 @@ let flexMessageObj = JSON.parse(json);
 
 // -----------------------------------------------------------------------------
 //席替えの結果と日付に合わせてflex messageを書き換え。ついでにモジュール化
-const flexMessage = () => {
+function flexMessage() => {
 
     //今日の日付を取得。Stringで扱う
     const today = new Date();
