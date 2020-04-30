@@ -84,13 +84,13 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
 
+  const jsonText = fs.readFile('http://seatchange.herokuapp.com/again-message.json', 'utf8');
+  const messageObj = JSON.parse(jsonText);
+  
     // イベントオブジェクトを順次処理。
   req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定
     if (event.type == "message" && event.message.type == "text"){
-      json = fs.readFile('http://seatchange.herokuapp.com/again-message.json', 'utf8');
-      const jsonText
-      const messageObj = JSON.parse(jsonText);
       // ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
       if (messageObj.some(value => value == event.message.text){
         // replyMessage()で返信し、そのプロミスをevents_processedに追加
