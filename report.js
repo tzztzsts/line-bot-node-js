@@ -483,6 +483,5 @@ const changed = require("./change");
     }
 
   }));
-});
 
 module.exports = events_processed;
