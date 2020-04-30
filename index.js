@@ -530,5 +530,3 @@ Promise.all(events_processed).then(
   }
 )
 });
-
-console log(changed);

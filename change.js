@@ -35,4 +35,5 @@ const changedSeats = (temporarySeats1, selected, temporarySeats2) => {
   return temporarySeats1;
 };
 
-module.exports = changed => changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了。モジュールとしてエクスポート
+const changed = changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
+module.exports = changed //モジュールとしてエクスポート
