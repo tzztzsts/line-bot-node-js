@@ -1,4 +1,4 @@
-const flexMessage = require('./change')//change.jsのfunctionをインポート
+const flexMessage(date) = require('./change')//change.jsのfunctionをインポート
 
 // -----------------------------------------------------------------------------
 //今日の日付を取得。前日に席替えするなら日付＋１
