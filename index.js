@@ -43,15 +43,15 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   function handleEvent(event) {
 
     //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
-    if (messageObj.word_list.some(value => event.message.text.match(value))){
+    //if (messageObj.word_list.some(value => event.message.text.match(value))){
         //replyMessage()で返信し、そのプロミスをevents_processedに追加
-        return events_processed.push(bot.replyMessage(event.replyToken, {
+        events_processed.push(bot.replyMessage(event.replyToken, {
           type: "flex",
           altText: "席替えの結果",
           contents:
           flexMessage()
       }));
-    };
+    //};
   };
 
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
