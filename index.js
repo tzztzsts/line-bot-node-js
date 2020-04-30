@@ -49,9 +49,9 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           type: "flex",
           altText: "席替えの結果",
           contents:{
-          flexMessage();
+          flexMessage()
         }
-      }))
+      }));
     };
   };
 
