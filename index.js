@@ -43,22 +43,19 @@ const changedSeats = (temporarySeats1, selected, temporarySeats2) => {
 changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
 
 // -----------------------------------------------------------------------------
-//一斉送信用のflex messageをjsonファイルから読み込む
+//一斉送信用のflex messageをjsonファイルから読み込み、オブジェクトとして扱う
 const fs = require('fs');
-let json = fs.readFileSync('http://seatchange.herokuapp.com/flex-message.json', 'utf8');
+const json = fs.readFileSync('http://seatchange.herokuapp.com/flex-message.json', 'utf8');
+let flexMessageObj = JSON.parse(json);
 
 // -----------------------------------------------------------------------------
-//席替えの結果と日付に合わせてflex messageを書き換え、オブジェクトとして取得
-json.replace("0?", date);
+//席替えの結果と日付に合わせてflex messageを書き換え
+flexMessageObj.replace("{{day}}", date);
 
-let seatNumber, changedSeatsAsString;
 for (i = 1; i <= 39; i++) {
-  seatNumber = i + "?";
-  changedSeatsAsString = changedSeats[i - 1] + "";
-  json.replace(seatNumber, changedSeatsAsString);
+  flexMessageObj.replace("{{number}}", "" + changedSeats[i - 1]);
 };
 
-const flexMessageObj = JSON.parse(json);
 // -----------------------------------------------------------------------------
 // モジュールのインポート
 const server = require("express")();
@@ -97,7 +94,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       // ユーザーからのテキストメッセージが想定していたもの(再度座席表を送る)だった場合のみ反応
       if (messageObj.some(value => value == event.message.text){
         // replyMessage()で返信し、そのプロミスをevents_processedに追加
-        events_processed.push(bot.replyMessage(event.replyToken, json));
+        events_processed.push(bot.replyMessage(event.replyToken, flexMessageObj));
       }
     }
   });
