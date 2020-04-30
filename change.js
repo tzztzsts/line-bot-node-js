@@ -64,4 +64,4 @@ const flexMessage = () => {
   console.log(flexMessageObj);
 };
 
-module.exprts = flexMessage;
+module.exprts = flexMessage();
