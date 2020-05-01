@@ -43,7 +43,7 @@ const bot = new line.Client(line_config);
 
   const messageObj_again = JSON.parse(jsonText_again);
 
-  const jsonText_request = fs.readFileSync('./request_message.json', 'uft8', (error, data) => {
+  const jsonText_request = fs.readFileSync('./request_message.json', 'utf8', (error, data) => {
     if (error) {
       return;
     }
