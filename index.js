@@ -614,7 +614,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
         if (messageObj_again.word_list.some(value => event.message.text.match(value))){
 
-          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
+          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj))
 
         } else if (messageObj_request.word_list.some(value => value === event.message.text){
 
@@ -655,7 +655,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           };
         };
-      }
+      };
     });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
