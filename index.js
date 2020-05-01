@@ -620,7 +620,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
 
-        } else if (messageObj_request.word_list.some(value => value === event.message.text){
+        } else if (messageObj_request.word_list.some(value => (value === event.message.text)){
 
               waiting = true;
 
