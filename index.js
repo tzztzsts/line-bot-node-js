@@ -13,7 +13,7 @@ const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
 //データベース接続準備
-const { Client } = require('pg');
+const {Client} = require('pg');
 
 const client = new Client({
   user:  process.env.DB_USER,
@@ -114,7 +114,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           client.connect();
 
           client.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
-            client.end();
+            client.on('drain', client.end.bind(client));
           });//メッセージの返信。要望をデータベースに格納
         }
       }
