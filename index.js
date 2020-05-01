@@ -1,5 +1,7 @@
 //時刻の取得
-const dt = new Date();
+var dt = new Date();
+
+let hour,min,excess;
 
 // -----------------------------------------------------------------------------
 //モジュールのインポート
@@ -65,14 +67,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   const waitTime = 3;//待ち時間設定
 
-  let hour = dt.getHours();
-  let min = dt.setMinutes(dt.getMinutes() + waitTime);
-
-  let excess = min - 59
-  if (excess > 0) {
-    min = excess - 1;
-  }
-
   // イベント処理
   req.body.events.forEach((event) => {
 
@@ -129,8 +123,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       }
     });
 
+    hour = dt.getHours();
+    min = dt.setMinutes(dt.getMinutes() + waitTime);
+
+    excess = min - 59
+    if (excess > 0) {
+      min = excess - 1;
+    }
+
     //待ち時間が過ぎても待機状態であればメッセージを送って待機状態をやめる
-    cron.schedule('00 ' + min + ' ' + hour + ' * * *', () => {
+    cron.schedule('0 ' + min + ' ' + hour + ' * * *', () => {
 
       if (waiting){
 
