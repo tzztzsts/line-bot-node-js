@@ -509,14 +509,8 @@ server.listen(process.env.PORT || 3000);
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
-// -----------------------------------------------------------------------------
-// ルーター設定
-server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
-  res.sendStatus(200);// 先行してLINE側にステータスコード200でレスポンスする
-
-  let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
-
+//------------------------------------------------------------------------------
   //想定済文字烈の読み込み
   const jsonText_again = fs.readFileSync('./again-message.json', 'utf8', (error, data) => {
     if (error) {
@@ -537,8 +531,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   const messageObj_request = JSON.parse(jsonText_request);
   //読み込み終了
 
+
+//---------------------------------------------------------------------------------
   let waiting = false;//要望メッセージ待機状態か否かをここに入れる
 
+//---------------------------------------------------------------------------------
   //待機時間を作る
   function asyncSetTimeout(msec, func = () => {}){
       let timeoutId;
@@ -599,9 +596,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       }
   })();
 
-  //待機時間は５分
+  //待機時間は2分
   const timeOut = asyncSetTimeout(1000 * 60 * 2);
 
+// -----------------------------------------------------------------------------
+// ルーター設定
+server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
+
+  res.sendStatus(200);// 先行してLINE側にステータスコード200でレスポンスする
+
+  let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
   // イベント処理
   req.body.events.forEach((event) => {
 
@@ -614,7 +618,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
         if (messageObj_again.word_list.some(value => event.message.text.match(value))){
 
-          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj))
+          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
 
         } else if (messageObj_request.word_list.some(value => value === event.message.text){
 
