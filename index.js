@@ -543,34 +543,33 @@ const bot = new line.Client(line_config);
       const exec = () => new Promise((res) => {
               r = res
               timeoutId = setTimeout(async () => {
-                  timeoutId = null
-                  await func()
-                  res()
-              },msec)
-          })
+                  timeoutId = null;
+                  await func();
+                  res();
+              },msec);
+          });
       return {
           exec,
           cancel: () => {
               if (timeoutId) {
-                clearTimeout(timeoutId)
-                timeoutId = null
-                r()
+                clearTimeout(timeoutId);
+                timeoutId = null;
+                r();
               }
           }
-      }
-  };
+      };
+  }
 
   //要望メッセージ待機状態を途中で解除する
   let cancel;
 
   (async ()=>{
-      const a = asyncSetTimeout(1000,asyncFunc)
-      cancel = a.cancel
+      const a = asyncSetTimeout(1000,asyncFunc);
+      cancel = a.cancel;
       await a.exec();// ここで設定した時間分処理を待ったあとasyncFuncを実行する
 
       //cancel()されるとここの処理が行われる
-      function response_request() {
-
+      {
         if (waiting) {
           events_processed.push(bot.replyMessage(event.replyToken, {
             messages: [
@@ -620,7 +619,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
 
-        } else if (messageObj_request.word_list.some(value => (value === event.message.text)){
+        } else if (messageObj_request.word_list.some(value => (value === event.message.text))){
 
               waiting = true;
 
@@ -638,7 +637,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               }));
 
               await timeOut.exec();
-              await waiting = false;
+              await asyncFunc(){
+                return false;
+              }
+
+              waiting = asyncFunc();
 
               events_processed.push(bot.replyMessage(event.replyToken, {
                 messages: [
@@ -657,9 +660,9 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
             cancel();//メッセージの返信。要望をデータベースに格納
 
-          };
-        };
-      };
+          }
+        }
+      }
     });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
