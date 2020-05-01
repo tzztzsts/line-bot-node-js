@@ -114,8 +114,13 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           client.connect();
 
           client.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
-            client.on('drain', client.end.bind(client));
+            if (err) {
+                console.log(err);
+            }
           });//メッセージの返信。要望をデータベースに格納
+
+          client.end;
+
         }
       }
     });
