@@ -129,3 +129,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       }
     });
 });
+
+cron.schedule('0 27 20 * * *',() => {
+
+  server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
+    // 先行してLINE側にステータスコード200でレスポンスする。
+    res.sendStatus(200);
+
+    bot.broadcast(flexMessageObj)
+  });
+},{
+  scheduled: true,
+  timezone: "Japan/Tokyo"
+});
