@@ -481,6 +481,18 @@ const flexMessageObj = {
   }
 };
 
+// -----------------------------------------------------------------------------
+//データベースに接続
+const { Client } = require('pg');
+
+const dbClient = new Client({
+  connectionString: process.env.DATABASE_URI
+});
+
+dbClient.connect();
+// -----------------------------------------------------------------------------
+//要望取得準備
+let userId, requestText;
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -523,37 +535,111 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   });
 
   const messageObj_request = JSON.parse(jsonText_request);
+  //読み込み終了
 
-  let waiting = false;
+  let waiting = false;//要望メッセージ待機状態か否かをここに入れる
+
+  //待機時間を作る
+  function asyncSetTimeout(msec, func = () => {}){
+      let timeoutId;
+      let r;
+      const exec = () => new Promise((res) => {
+              r = res
+              timeoutId = setTimeout(async () => {
+                  timeoutId = null
+                  await func()
+                  res()
+              },msec)
+          })
+      return {
+          exec,
+          cancel: () => {
+              if (timeoutId) {
+                clearTimeout(timeoutId)
+                timeoutId = null
+                r()
+              }
+          }
+      }
+  };
+
+  //要望メッセージ待機状態を途中で解除する
+  let cancel;
+
+  (async ()=>{
+      const a = asyncSetTimeout(1000,asyncFunc)
+      cancel = a.cancel
+      await a.exec();// ここで設定した時間分処理を待ったあとasyncFuncを実行する
+
+      //cancel()されるとここの処理が行われる
+      function response_request() {
+
+        if (waiting) {
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            messages: {
+              type: "text",
+              text: "ご意見ありがとうございます！"
+            },
+            {
+              type: "text",
+              text: "これからも何かありましたら気軽にどうぞ！"
+            }
+          }));
+
+          waiting = false;
+
+          userId = event.source.userId;
+          requestText = event.message.text;
+
+          dbClient.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");
+
+        }
+      }
+  })();
+
+  //待機時間は５分
+  const timeOut = asyncSetTimeout(1000 * 60 * 5);
 
   // イベント処理
   req.body.events.forEach((event) => {
 
-    if (!waiting) {
-      //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
-      if (messageObj_again.word_list.some(value => event.message.text.match(value))){
+    //イベントがメッセージかつメッセージがテキストだったときのみ反応
+    if (event.type === "message" && event.message.type === "text") {
 
-        events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
+      //要望メッセージ待機状態かの判断
+      if (!waiting) {
 
-      } else if (messageObj_request.word_list.some(value => value === event.message.text){
+        //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
+        if (messageObj_again.word_list.some(value => event.message.text.match(value))){
 
-        waiting = true;
-    
-        events_processed.push(bot.replyMessage(event.replyToken, {
-          messages: {
-            type: "text",
-            text: "何かお困りでしょうか？"
-          },
-          {
-            type: "text",
-            text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
-          }
-        }));
+          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
+
+        } else if (messageObj_request.word_list.some(value => value === event.message.text){
+
+          waiting = true;
+
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            messages: {
+              type: "text",
+              text: "何かお困りでしょうか？"
+            },
+            {
+              type: "text",
+              text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
+            }
+          }));
+
+          waiting = true;
+
+          await timeOut.exec();
+          await waiting = false;
+
+        };
+      } else {
+
+        cancel();//メッセージの返信。要望をデータベースに格納
+
       };
-    } else {
-
-
-
     };
   });
 
@@ -563,40 +649,3 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       console.log(`${response.length} event(s) processed.`);
   })
 });
-
-
-//------------------------------------------------------------
-function asyncSetTimeout(msec, func = () => {}){
-    let timeoutId
-    let r
-    const exec = () => new Promise((res) => {
-            r = res
-            timeoutId = setTimeout(async () => {
-                timeoutId = null
-                await func()
-                res()
-            },msec)
-        })
-    return {
-        exec,
-        cancel: () => {
-            if (timeoutId) {
-              clearTimeout(timeoutId)
-              timeoutId = null
-              r()
-            }
-        }
-    }
-}
-
-
-let cancel
-
-(async ()=>{
-    const a = asyncSetTimeout(1000,asyncFunc)
-    cancel = a.cancel
-    await a.exec() // ここで設定した時間分処理を待ったあとasyncFuncを実行する
-    dosomething()
-})()
-
-cancel() //
