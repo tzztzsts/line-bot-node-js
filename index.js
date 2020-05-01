@@ -14,6 +14,9 @@ const flexMessageObj = require('./change.js');
 // -----------------------------------------------------------------------------
 //データベースに接続
 const pool = require('./database.js');
+
+pool.connect();
+
 // -----------------------------------------------------------------------------
 //要望取得準備
 let userId, requestText;
@@ -35,7 +38,7 @@ const bot = new line.Client(line_config);
 
 
 //------------------------------------------------------------------------------
-  //想定済文字烈の読み込み
+  //想定済文字列の読み込み
   const jsonText_again = fs.readFileSync('./again-message.json', 'utf8', (error, data) => {
     if (error) {
       return;
@@ -102,30 +105,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           userId = event.source.userId;
           requestText = event.message.text;
 
-          pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
+          pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
+            pool.end();
+          });//メッセージの返信。要望をデータベースに格納
         }
-      }
-    });
-
-    hour = dt.getHours();
-    min = dt.getMinutes() + waitTime;
-
-    excess = min - 59
-    if (excess > 0) {
-      min = excess - 1;
-    }
-
-    //待ち時間が過ぎても待機状態であればメッセージを送って待機状態をやめる
-    cron.schedule('0 ' + min + ' ' + hour + ' * * *', () => {
-
-      if (waiting){
-
-        waiting = false;
-
-        bot.replyMessage(event.replyToken, {
-          type: "text",
-          text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
-        });
       }
     });
 });
