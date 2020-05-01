@@ -83,26 +83,26 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
         } else if (messageObj_request.word_list.some(value => (value === event.message.text))){
 
-              waiting = true;
+            waiting = true;
 
-              bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 などなどご自由にどうぞ！"
-              });
-
-          } else {
             bot.replyMessage(event.replyToken, {
               type: "text",
-              text: "ご意見ありがとうございます！ これからも何かありましたら気軽にどうぞ！"
+              text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 などなどご自由にどうぞ！"
             });
-
-            waiting = false;
-
-            userId = event.source.userId;
-            requestText = event.message.text;
-
-            pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
           }
+
+        } else {
+          bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: "ご意見ありがとうございます！ これからも何かありましたら気軽にどうぞ！"
+          });
+
+          waiting = false;
+
+          userId = event.source.userId;
+          requestText = event.message.text;
+
+          pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
         }
       }
     });
