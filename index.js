@@ -5,19 +5,13 @@ const dt = new Date();
 //モジュールのインポート
 const fs = require('fs');//jsonの読み取り用
 const cron = require('node-cron');//時間をトリガーにする
-const server = require('express')();
+const server = require('express');
 const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
 const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
 //データベースに接続
-const { Client } = require('pg');
-
-const dbClient = new Client({
-  connectionString: process.env.DATABASE_URI
-});
-
-dbClient.connect();
+const pool = require('./database.js');
 // -----------------------------------------------------------------------------
 //要望取得準備
 let userId, requestText;
@@ -63,45 +57,6 @@ const bot = new line.Client(line_config);
 //---------------------------------------------------------------------------------
   let waiting = false;//要望メッセージ待機状態か否かをここに入れる
 
-//---------------------------------------------------------------------------------
-  //待機時間を作る
-  function asyncSetTimeout(msec, func = () => {}){
-      let timeoutId;
-      let r;
-      const exec = () => new Promise((res) => {
-              r = res
-              timeoutId = setTimeout(async () => {
-                  timeoutId = null;
-                  await func();
-                  res();
-              },msec);
-          });
-      return {
-          exec,
-          cancel: () => {
-              if (timeoutId) {
-                clearTimeout(timeoutId);
-                timeoutId = null;
-                r();
-              }
-          }
-      };
-  }
-
-  //要望メッセージ待機状態を途中で解除する
-  let cancel;
-
-  (async ()=>{
-      const a = asyncSetTimeout(1000,asyncFunc);
-      cancel = a.cancel;
-      await a.exec();// ここで設定した時間分処理を待ったあとasyncFuncを実行する
-
-      //cancel()されるとここの処理が行われる
-      {
-
-      }
-  })();
-
 // -----------------------------------------------------------------------------
 // ルーター設定
 server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
@@ -139,7 +94,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               });
 
-              const waitTime = 3;
+              const waitTime = 3;//待ち時間設定
 
               let hour = dt.getHours();
               let min = dt.setMinutes(dt.getMinutes() + waitTime);
@@ -148,24 +103,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               if (excess > 0) {
                 min = excess - 1;
               }
-
-              cron.schedule('00 ' + min + ' ' + hour + ' * * *', () => {
-
-                waiting = false;
-
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  messages: [
-                    {
-                      type: "text",
-                      text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
-                    },
-                    {
-                      type: "text",
-                      text: "いつでも気軽にご報告ください！"
-                    }
-                  ]
-                }));
-              });
 
           } else {
             bot.replyMessage(event.replyToken, {
@@ -186,9 +123,32 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             userId = event.source.userId;
             requestText = event.message.text;
 
-            dbClient.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
+            pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
           }
         }
       }
     });
+
+    //待ち時間が過ぎても待機状態であればメッセージを送って待機状態をやめる
+    cron.schedule('00 ' + min + ' ' + hour + ' * * *', () => {
+
+      if (waiting){
+
+        waiting = false;
+
+        events_processed.push(bot.replyMessage(event.replyToken, {
+          messages: [
+            {
+              type: "text",
+              text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
+            },
+            {
+              type: "text",
+              text: "いつでも気軽にご報告ください！"
+            }
+          ]
+        }));
+      }
+    });
+
 });
