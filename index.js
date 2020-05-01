@@ -125,7 +125,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         bot.replyMessage(event.replyToken, {
           type: "text",
           text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
-        }));
+        });
       }
     });
 });
