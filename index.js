@@ -124,7 +124,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     });
 
     hour = dt.getHours();
-    min = dt.setMinutes(dt.getMinutes() + waitTime);
+    min = dt.getMinutes() + waitTime;
 
     excess = min - 59
     if (excess > 0) {
