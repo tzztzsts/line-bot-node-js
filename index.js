@@ -577,12 +577,14 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         if (waiting) {
           events_processed.push(bot.replyMessage(event.replyToken, {
             messages: {
-              type: "text",
-              text: "ご意見ありがとうございます！"
-            },
-            {
-              type: "text",
-              text: "これからも何かありましたら気軽にどうぞ！"
+              [{
+                type: "text",
+                text: "ご意見ありがとうございます！"
+              },
+              {
+                type: "text",
+                text: "これからも何かありましたら気軽にどうぞ！"
+              }]
             }
           }));
 
@@ -620,12 +622,14 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           events_processed.push(bot.replyMessage(event.replyToken, {
             messages: {
-              type: "text",
-              text: "何かお困りでしょうか？"
-            },
-            {
-              type: "text",
-              text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
+              [{
+                type: "text",
+                text: "何かお困りでしょうか？"
+              },
+              {
+                type: "text",
+                text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
+              }]
             }
           }));
 
