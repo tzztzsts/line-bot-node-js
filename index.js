@@ -12,10 +12,8 @@ const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
 const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
-//データベースに接続
+//データベース接続準備
 const pool = require('./database.js');
-
-pool.connect();
 
 // -----------------------------------------------------------------------------
 //要望取得準備
@@ -104,6 +102,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           userId = event.source.userId;
           requestText = event.message.text;
+
+          pool.connect();
 
           pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
             pool.end();

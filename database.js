@@ -1,4 +1,4 @@
-//データベースに接続したい
+//データベース接続準備
 const pg = require('pg');
 require('dotenv').config();
 
