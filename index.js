@@ -7,7 +7,7 @@ const today = date.getDate();
 const fs = require('fs');
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const changed = require("./change");
+const changed = require("change");
 
 // -----------------------------------------------------------------------------
 //報告用のflexmessageオブジェクト
@@ -616,8 +616,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
 
-          //想定メッセージその２
-          if(messageObj_request.word_list.some(value => value === event.message.text){
+        } else if (messageObj_request.word_list.some(value => value === event.message.text){
 
               waiting = true;
 
@@ -649,16 +648,15 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                   }
                 ]
               }));
-            };
+
+          } else {
+
+            cancel();//メッセージの返信。要望をデータベースに格納
+
           };
         };
       }
-    }
-  });
-
-  if (waiting){
-    cancel();//メッセージの返信。要望をデータベースに格納
-  }
+    });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
   Promise.all(events_processed).then(
