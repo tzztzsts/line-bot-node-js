@@ -600,7 +600,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   })();
 
   //待機時間は５分
-  const timeOut = asyncSetTimeout(1000 * 60 * 5);
+  const timeOut = asyncSetTimeout(1000 * 60 * 2);
 
   // イベント処理
   req.body.events.forEach((event) => {
@@ -639,7 +639,19 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               await timeOut.exec();
               await waiting = false;
 
-            };
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                messages: [
+                  {
+                    type: "text",
+                    text: "2分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
+                  },
+                  {
+                    type: "text",
+                    text: "いつでも気軽にご報告ください！"
+                  }
+                ]
+              }));
+
           } else {
 
             cancel();//メッセージの返信。要望をデータベースに格納
