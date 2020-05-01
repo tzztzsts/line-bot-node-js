@@ -63,6 +63,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   res.sendStatus(200);// 先行してLINE側にステータスコード200でレスポンスする
 
+  const waitTime = 3;//待ち時間設定
+
+  let hour = dt.getHours();
+  let min = dt.setMinutes(dt.getMinutes() + waitTime);
+
+  let excess = min - 59
+  if (excess > 0) {
+    min = excess - 1;
+  }
+
   // イベント処理
   req.body.events.forEach((event) => {
 
@@ -93,16 +103,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                   }
                 ]
               });
-
-              const waitTime = 3;//待ち時間設定
-
-              let hour = dt.getHours();
-              let min = dt.setMinutes(dt.getMinutes() + waitTime);
-
-              let excess = min - 59
-              if (excess > 0) {
-                min = excess - 1;
-              }
 
           } else {
             bot.replyMessage(event.replyToken, {
