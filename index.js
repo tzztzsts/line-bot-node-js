@@ -87,7 +87,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
               bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 をご自由にどうぞ！"
+                text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 などなどご自由にどうぞ！"
               });
 
           } else {
@@ -122,7 +122,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
         waiting = false;
 
-        events_processed.push(bot.replyMessage(event.replyToken, {
+        bot.replyMessage(event.replyToken, {
           type: "text",
           text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
         }));
