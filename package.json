@@ -1,7 +1,6 @@
 {
   "name": "line-bot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,11 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "@line/bot-sdk": "^6.8.4",
+    "cron": "^1.8.2",
     "date-utils": "^1.2.21",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-cron": "^2.0.3",
+    "node-time": "^0.1.0",
     "pg": "^8.0.3",
     "promise": "^8.1.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
