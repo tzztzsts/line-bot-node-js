@@ -595,9 +595,6 @@ const bot = new line.Client(line_config);
       }
   })();
 
-  //待機時間は2分
-  const timeOut = asyncSetTimeout(1000 * 60 * 2);
-
 // -----------------------------------------------------------------------------
 // ルーター設定
 server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
@@ -636,6 +633,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               }));
 
+              //待機時間は2分
+              const timeOut = asyncSetTimeout(1000 * 60 * 2);
               await timeOut.exec();
               await asyncFunc(){
                 return false;
