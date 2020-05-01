@@ -16,7 +16,7 @@ server.listen(process.env.PORT || 3000);
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
-cron.schedule('0 3 19 * * *',() => {
+cron.schedule('0 20 19 * * *',() => {
 
   server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
