@@ -616,7 +616,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
 
-        } else if (messageObj_request.word_list.some(value => value === event.message.text){
+        }
+        else if(messageObj_request.word_list.some(value => value === event.message.text){
 
               waiting = true;
 
@@ -649,14 +650,13 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               }));
 
-          } else {
-
+          }
+          else{
             cancel();//メッセージの返信。要望をデータベースに格納
-
-          };
         };
       }
-    });
+    }
+  });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
   Promise.all(events_processed).then(
