@@ -1,6 +1,5 @@
 //時刻の取得
-const now = new Date();
-const today = now.getDate();
+const dt = new Date();
 
 // -----------------------------------------------------------------------------
 //モジュールのインポート
@@ -140,20 +139,33 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               });
 
-              waiting = false;
+              const waitTime = 3;
 
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                messages: [
-                  {
-                    type: "text",
-                    text: "2分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
-                  },
-                  {
-                    type: "text",
-                    text: "いつでも気軽にご報告ください！"
-                  }
-                ]
-              }));
+              let hour = dt.getHours();
+              let min = dt.setMinutes(dt.getMinutes() + waitTime);
+
+              let excess = min - 59
+              if (excess > 0) {
+                min = excess - 1;
+              }
+
+              cron.schedule('00 ' + min + ' ' + hour + ' * * *', () => {
+
+                waiting = false;
+
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  messages: [
+                    {
+                      type: "text",
+                      text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
+                    },
+                    {
+                      type: "text",
+                      text: "いつでも気軽にご報告ください！"
+                    }
+                  ]
+                }));
+              });
 
           } else {
             bot.replyMessage(event.replyToken, {

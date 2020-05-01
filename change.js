@@ -501,7 +501,7 @@ const flexMessageObj = {
                   text: "" + changed[38],
                   align: "center",
                   gravity: "center"
-                }
+                },
                 {
                   type: "separator"
                 }
