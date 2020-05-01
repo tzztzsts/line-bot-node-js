@@ -86,30 +86,18 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               waiting = true;
 
               bot.replyMessage(event.replyToken, {
-                messages: [
-                  {
-                    type: "text",
-                    text: "何かお困りでしょうか？"
-                  },
-                  {
-                    type: "text",
-                    text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
-                  }
-                ]
+                {
+                  type: "text",
+                  text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 をご自由にどうぞ！"
+                }
               });
 
           } else {
             bot.replyMessage(event.replyToken, {
-              messages: [
-                {
-                  type: "text",
-                  text: "ご意見ありがとうございます！"
-                },
-                {
-                  type: "text",
-                  text: "これからも何かありましたら気軽にどうぞ！"
-                }
-              ]
+              {
+                type: "text",
+                text: "ご意見ありがとうございます！ これからも何かありましたら気軽にどうぞ！"
+              }
             });
 
             waiting = false;
@@ -139,18 +127,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         waiting = false;
 
         events_processed.push(bot.replyMessage(event.replyToken, {
-          messages: [
-            {
-              type: "text",
-              text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
-            },
-            {
-              type: "text",
-              text: "いつでも気軽にご報告ください！"
-            }
-          ]
+          {
+            type: "text",
+            text: waitTime + "分間何も入力されなかったため、質問/要望/不具合に関する報告 の入力の受付を終了します。"
+          }
         }));
       }
     });
-
 });
