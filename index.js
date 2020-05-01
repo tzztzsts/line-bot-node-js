@@ -5,7 +5,7 @@ const dt = new Date();
 //モジュールのインポート
 const fs = require('fs');//jsonの読み取り用
 const cron = require('node-cron');//時間をトリガーにする
-const server = require('express');
+const server = require('express')();
 const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
 const flexMessageObj = require('./change.js');
 
