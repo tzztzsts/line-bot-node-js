@@ -12,7 +12,7 @@ const line_config = {
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
-cron.schedule('0 3 18 * * *',() => {
+cron.schedule('0 3 19 * * *',() => {
 
   server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
