@@ -1,485 +1,14 @@
-//日付の取得
-const date = new Date();
-const today = date.getDate();
+//時刻の取得
+const now = new Date();
+const today = now.getDate();
 
 // -----------------------------------------------------------------------------
 //モジュールのインポート
-const fs = require('fs');
-const server = require("express")();
-const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const changed = require("change");
-
-// -----------------------------------------------------------------------------
-//報告用のflexmessageオブジェクト
-const flexMessageObj = {
-  type: "flex",
-  altText: today + "日の席替えの結果",
-  contents:{
-      type: "bubble",
-      size: "giga",
-      body: {
-        type: "box",
-        layout: "vertical",
-        contents: [
-          {
-            type: "text",
-            text: today + "日の座席",
-            weight: "bold",
-            size: "xl"
-          },
-          {
-            type: "box",
-            layout: "horizontal",
-            spacing: "none",
-            offsetTop: "md",
-            contents: [
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[0],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[1],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[2],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[3],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[4],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[5],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[6],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[7],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[8],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[9],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[10],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[11],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[12],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[13],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[14],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[15],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[16],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[17],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[18],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[19],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[20],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[21],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[22],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[23],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[24],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[25],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[26],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[27],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[28],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[29],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[30],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[31],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[32],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-              {
-                type: "separator"
-              },
-              {
-                type: "box",
-                layout: "vertical",
-                paddingStart: "md",
-                paddingEnd: "md",
-                spacing: "md",
-                contents: [
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[33],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[34],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[35],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[36],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[37],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  },
-                  {
-                    type: "text",
-                    text: "" + changed[38],
-                    align: "center",
-                    gravity: "center"
-                  },
-                  {
-                    type: "separator"
-                  }
-                ]
-              },
-            ]
-          }
-        ]
-      }
-  }
-};
+const fs = require('fs');//jsonの読み取り用
+const cron = require('node-cron');//時間をトリガーにする
+const server = require('express')();
+const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
+const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
 //データベースに接続
@@ -570,28 +99,7 @@ const bot = new line.Client(line_config);
 
       //cancel()されるとここの処理が行われる
       {
-        if (waiting) {
-          events_processed.push(bot.replyMessage(event.replyToken, {
-            messages: [
-              {
-                type: "text",
-                text: "ご意見ありがとうございます！"
-              },
-              {
-                type: "text",
-                text: "これからも何かありましたら気軽にどうぞ！"
-              }
-            ]
-          }));
 
-          waiting = false;
-
-          userId = event.source.userId;
-          requestText = event.message.text;
-
-          dbClient.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");
-
-        }
       }
   })();
 
@@ -601,7 +109,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   res.sendStatus(200);// 先行してLINE側にステータスコード200でレスポンスする
 
-  let events_processed = [];// すべてのイベント処理のプロミスを格納する配列
   // イベント処理
   req.body.events.forEach((event) => {
 
@@ -614,13 +121,13 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
         if (messageObj_again.word_list.some(value => event.message.text.match(value))){
 
-          events_processed.push(bot.replyMessage(event.replyToken, changedSeatObj));
+          bot.replyMessage(event.replyToken, flexMessageObj);
 
         } else if (messageObj_request.word_list.some(value => (value === event.message.text))){
 
               waiting = true;
 
-              events_processed.push(bot.replyMessage(event.replyToken, {
+              bot.replyMessage(event.replyToken, {
                 messages: [
                   {
                     type: "text",
@@ -631,16 +138,9 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
                     text: "質問/要望/不具合に関する報告 をご自由にどうぞ！"
                   }
                 ]
-              }));
+              });
 
-              //待機時間は2分
-              const timeOut = asyncSetTimeout(1000 * 60 * 2);
-              await timeOut.exec();
-              await asyncFunc(){
-                return false;
-              }
-
-              waiting = asyncFunc();
+              waiting = false;
 
               events_processed.push(bot.replyMessage(event.replyToken, {
                 messages: [
@@ -656,17 +156,27 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               }));
 
           } else {
+            bot.replyMessage(event.replyToken, {
+              messages: [
+                {
+                  type: "text",
+                  text: "ご意見ありがとうございます！"
+                },
+                {
+                  type: "text",
+                  text: "これからも何かありましたら気軽にどうぞ！"
+                }
+              ]
+            });
 
-            cancel();//メッセージの返信。要望をデータベースに格納
+            waiting = false;
 
+            userId = event.source.userId;
+            requestText = event.message.text;
+
+            dbClient.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")");//メッセージの返信。要望をデータベースに格納
           }
         }
       }
     });
-
-    // すべてのイベント処理が終了したら何個のイベントが処理されたか出力
-  Promise.all(events_processed).then(
-    (response) => {
-      console.log(`${response.length} event(s) processed.`);
-  })
 });

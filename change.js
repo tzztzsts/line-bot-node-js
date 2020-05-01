@@ -1,3 +1,8 @@
+//日付の取得
+const now = new Date();
+const today = date.getDate();
+
+//-------------------------------------------------------------------------------
 //目が悪くない人たちの席次をまずはシャッフル
 const temporarySeats1 = [1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 26, 27, 28, 30, 31, 32, 34, 35, 36, 37, 38];
 
@@ -36,4 +41,477 @@ const changedSeats = (temporarySeats1, selected, temporarySeats2) => {
 };
 
 const changed = changedSeats(temporarySeats1, selected, temporarySeats2);//席替え完了
-module.exports = changed; //モジュールとしてエクスポート
+
+//-----------------------------------------------------------------------------
+//報告用のflexmessageオブジェクト
+const flexMessageObj = {
+  type: "flex",
+  altText: today + "日の席替えの結果",
+  contents:{
+    type: "bubble",
+    size: "giga",
+    body: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: today + "日の座席",
+          weight: "bold",
+          size: "xl"
+        },
+        {
+          type: "box",
+          layout: "horizontal",
+          spacing: "none",
+          offsetTop: "md",
+          contents: [
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[0],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[1],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[2],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[3],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[4],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[5],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[6],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                }
+              ]
+            },
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[7],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[8],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[9],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[10],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[11],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[12],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[13],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                }
+              ]
+            },
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[14],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[15],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[16],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[17],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[18],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[19],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                }
+              ]
+            },
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[20],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[21],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                  {
+                  type: "text",
+                  text: "" + changed[22],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[23],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[24],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[25],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                }
+              ]
+            },
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[26],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[27],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[28],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[29],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[30],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[31],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[32],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                }
+              ]
+            },
+            {
+              type: "separator"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              paddingStart: "md",
+              paddingEnd: "md",
+              spacing: "md",
+              contents: [
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[33],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[34],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[35],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[36],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[37],
+                  align: "center",
+                  gravity: "center"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  type: "text",
+                  text: "" + changed[38],
+                  align: "center",
+                  gravity: "center"
+                }
+                {
+                  type: "separator"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+};
+
+module.exports = flexMessageObj;
