@@ -13,7 +13,15 @@ const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
 //データベース接続準備
-const pool = require('./database.js');
+const { Client } = require('pg');
+
+const client = new Client({
+  user: DB_USER,
+  host: DB_HOST,
+  database: DB_DATABASE,
+  password: DB_PASSWORD,
+  port: 5432
+})
 
 // -----------------------------------------------------------------------------
 //要望取得準備
@@ -103,10 +111,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
           userId = event.source.userId;
           requestText = event.message.text;
 
-          pool.connect();
+          client.connect();
 
-          pool.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
-            pool.end();
+          client.query("INSERT INTO Request VALUES ("+ userId +","+ requestText +")", (err, res) => {
+            client.end();
           });//メッセージの返信。要望をデータベースに格納
         }
       }
