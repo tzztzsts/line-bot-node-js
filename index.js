@@ -113,9 +113,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           client.connect();
 
-          client.query("INSERT INTO request (line_id, content) VALUES ("+ userId +","+ requestText +")"), (err, res) => {
-            if (err) {
-                console.log(err);
+          client.query({text: "INSERT INTO request(line_id, content) VALUES ($1, $2)", values: [userId, requestText]}), (err_client, res_client) => {
+            if (err_client) {
+                console.log(err_client);
+            } else {
+              console.log(res_client.rows[0]);
             }
           };//メッセージの返信。要望をデータベースに格納
 
