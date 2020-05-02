@@ -128,9 +128,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     });
 });
 
-server.get('/', (req, res) => {
+//定期連絡用
+server.get('/reg', (req, res) => {
     // 先行してステータスコード200でレスポンスする
   res.sendStatus(200);
 
-  bot.broadcast(flexMessageObj)
+  bot.broadcast(flexMessageObj);
+});
+
+//dynoを起こす
+server.get('/reg', (req, res) => {
+    // 先行してステータスコード200でレスポンスする
+  res.sendStatus(200);
 });
