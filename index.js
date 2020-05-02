@@ -113,7 +113,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           client.connect();
 
-          client.query("INSERT INTO request (line_id, content) VALUES ("+ userId +","+ requestText +")", (err, res) => {
+          client.query("INSERT INTO request (line_id, content) VALUES ("+ userId +","+ requestText +")"), (err, res) => {
             if (err) {
                 console.log(err);
             }
