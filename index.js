@@ -122,7 +122,9 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             }
           };//メッセージの返信。要望をデータベースに格納
 
-          client.end;
+          client.on('drain', function(){
+            client.end.bind(client);
+          });
 
         }
       }
