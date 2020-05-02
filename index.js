@@ -66,7 +66,7 @@ const bot = new line.Client(line_config);
 
 
 //---------------------------------------------------------------------------------
-  let waiting = false;//要望メッセージ待機状態か否かをここに入れる
+  let waiting = {};//ユーザーごとに要望メッセージ待機状態か否かをここに入れる
 
 // -----------------------------------------------------------------------------
 // ルーター設定
@@ -82,8 +82,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     //イベントがメッセージかつメッセージがテキストだったときのみ反応
     if (event.type === "message" && event.message.type === "text") {
 
+      userId = event.source.userId;
+
       //要望メッセージ待機状態かの判断
-      if (!waiting) {
+      if (waiting.hasOwnProperty(userId) && !waiting[userId]) {
 
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
         if (messageObj_again.word_list.some(value => event.message.text.match(value))){
@@ -92,7 +94,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
         } else if (messageObj_request.word_list.some(value => (value === event.message.text))){
 
-            waiting = true;
+            waiting[userId] = true;
 
             bot.replyMessage(event.replyToken, {
               type: "text",
@@ -106,9 +108,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             text: "ご意見ありがとうございます！ これからも何かありましたら気軽にどうぞ！"
           });
 
-          waiting = false;
+          waiting[userId] = false;
 
-          userId = event.source.userId;
           requestText = event.message.text;
 
           client.connect();
