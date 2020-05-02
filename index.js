@@ -85,7 +85,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       userId = event.source.userId;
 
       //要望メッセージ待機状態かの判断
-      if (!waiting.hasOwnProperty(userId) && !waiting[userId]) {
+      if (!waiting.hasOwnProperty(userId) || !waiting[userId]) {
 
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
         if (messageObj_again.word_list.some(value => event.message.text.match(value))){
