@@ -137,7 +137,7 @@ server.get('/reg', (req, res) => {
 });
 
 //dynoを起こす
-server.get('/reg', (req, res) => {
+server.get('/', (req, res) => {
     // 先行してステータスコード200でレスポンスする
   res.sendStatus(200);
 });
