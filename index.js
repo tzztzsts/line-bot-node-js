@@ -7,7 +7,7 @@ let hour,min,excess;
 //モジュールのインポート
 const fs = require('fs');//jsonの読み取り用
 const cron = require('node-cron');//時間をトリガーにする
-const server = require('express')();
+const express = require('express');
 const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
 const flexMessageObj = require('./change.js');
 
@@ -21,7 +21,7 @@ const client = new Client({
   database:  process.env.DB_DATABASE,
   password:  process.env.DB_PASSWORD,
   port: 5432
-})
+});//環境変数の取得
 
 // -----------------------------------------------------------------------------
 //要望取得準備
@@ -36,6 +36,8 @@ const line_config = {
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
+const server = express();
+
 server.listen(process.env.PORT || 3000);
 
 // -----------------------------------------------------------------------------
@@ -84,7 +86,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
       userId = event.source.userId;
 
-      //要望メッセージ待機状態かの判断
+      //ユーザーごとに要望メッセージ待機状態かの判断
       if (!waiting.hasOwnProperty(userId) || !waiting[userId]) {
 
         //ユーザーからのテキストメッセージが想定していた文字列を含む場合のみ反応
@@ -121,22 +123,14 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
               console.log(res_client.rows[0]);
             }
           };//メッセージの返信。要望をデータベースに格納
-
-          client.on('drain', function(){
-            client.end.bind(client);
-          });
-
         }
       }
     });
 });
 
-cron.schedule('0 36 11 * * *',() => {
+server.get('/', (req, res) => {
+    // 先行してステータスコード200でレスポンスする
+  res.sendStatus(200);
 
-  server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
-    // 先行してLINE側にステータスコード200でレスポンスする。
-    res.sendStatus(200);
-
-    bot.broadcast(flexMessageObj)
-  });
+  bot.broadcast(flexMessageObj)
 });
