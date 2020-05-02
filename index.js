@@ -117,7 +117,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             if (err) {
                 console.log(err);
             }
-          });//メッセージの返信。要望をデータベースに格納
+          };//メッセージの返信。要望をデータベースに格納
 
           client.end;
 
