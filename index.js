@@ -92,7 +92,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
           bot.replyMessage(event.replyToken, flexMessageObj);
 
-        } else if (messageObj_request.word_list.some(value => (value === event.message.text))){
+        } else if (messageObj_request.word_list.some(value => event.message.text.match(value))){
 
             waiting[userId] = true;
 
