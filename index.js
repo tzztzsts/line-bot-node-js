@@ -128,7 +128,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
 //定期連絡用
 server.get('/reg', (req, res) => {
-    // 先行してステータスコード200でレスポンスする
+    // ステータスコード200でレスポンスする
   res.sendStatus(200);
 
   bot.broadcast(flexMessageObj);
@@ -136,6 +136,6 @@ server.get('/reg', (req, res) => {
 
 //dynoを起こす
 server.get('/', (req, res) => {
-    // 先行してステータスコード200でレスポンスする
+    // ステータスコード200でレスポンスする
   res.sendStatus(200);
 });
