@@ -140,7 +140,7 @@ server.get('/', (req, res) => {
 
 server.use(bodyParser.json());//json受信
 
-server.get('/sch',(req, res) => {
+server.post('/sch',(req, res) => {
   //先行してステータスコード200でレスポンスする
   res.sendStatus(200);
 
