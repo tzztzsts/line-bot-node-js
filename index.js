@@ -137,7 +137,7 @@ server.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-server.post('/sch',(req, res)) => {
+server.get('/sch',(req, res)) => {
   //先行してステータスコード200でレスポンスする
   res.sendStatus(200);
 
