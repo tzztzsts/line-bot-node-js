@@ -6,6 +6,7 @@ var dt = new Date();
 const fs = require('fs');//jsonの読み取り用
 const express = require('express');
 const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
+const bodyParser = require('body-parser');
 const flexMessageObj = require('./change.js');
 
 // -----------------------------------------------------------------------------
@@ -137,9 +138,11 @@ server.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-server.get('/sch',(req, res) => {
+server.use(bodyParser.json());//json受信
+
+server.post('/sch',(req, res) => {
   //先行してステータスコード200でレスポンスする
   res.sendStatus(200);
 
-  bot.broadcast(req.message);
+  bot.broadcast(req.body.message);
 });
