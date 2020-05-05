@@ -138,6 +138,9 @@ server.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
+server.use(bodyParser.urlencoded({
+    extended: true
+}));
 server.use(bodyParser.json());//json受信
 
 server.post('/sch',(req, res) => {
