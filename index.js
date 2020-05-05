@@ -4,7 +4,6 @@ var dt = new Date();
 // -----------------------------------------------------------------------------
 //モジュールのインポート
 const fs = require('fs');//jsonの読み取り用
-const cron = require('node-cron');//時間をトリガーにする
 const express = require('express');
 const line = require('@line/bot-sdk'); // Messaging APIのSDKをインポート
 const flexMessageObj = require('./change.js');
@@ -73,8 +72,6 @@ const bot = new line.Client(line_config);
 server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
   res.sendStatus(200);// 先行してLINE側にステータスコード200でレスポンスする
-
-  const waitTime = 3;//待ち時間設定
 
   // イベント処理
   req.body.events.forEach((event) => {
