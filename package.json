@@ -29,6 +29,7 @@
     "lodash.template": "^4.5.0",
     "mime": "^2.4.5",
     "minimatch": "^3.0.4",
+    "pg": "^8.0.3",
     "rxjs": "^6.5.5",
     "ts-helpers": "^1.1.2",
     "webpack-dev-server": "^3.10.3",
