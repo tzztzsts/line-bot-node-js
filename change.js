@@ -34,7 +34,7 @@ for (let i2 = temporarySeats2.length - 1; i2 >= 0; i2--) {
 // -----------------------------------------------------------------------------
 //２つのtemporarySeatsが合わさって席が決定。なんかもっとシンプルな方法ありそう
 const changedSeats = (seats1, s, seats2) => {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     seats1.splice(s[i] - 1, 0, seats2[i]);
   }
   return seats1;
