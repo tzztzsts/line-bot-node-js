@@ -63,6 +63,7 @@ const bot = new line.Client(line_config);
 
 //---------------------------------------------------------------------------------
   let waiting = {};//ユーザーごとに要望メッセージ待機状態か否かをここに入れる
+  let profileSetting = {};//ユーザーごとプロフィール設定の進捗状況をここに入れる
 
 // -----------------------------------------------------------------------------
 // ルーター設定
@@ -88,13 +89,30 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
         } else if (messageObj_request.word_list.some(value => event.message.text.match(value))){
 
-            waiting[userId] = true;
+          waiting[userId] = true;
+
+          bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 などなどご自由にどうぞ！"
+          });
+        } else if (event.message.text === "プロフィール設定"){
+
+          if(!profileSetting.hasOwnProperty(userId)){
 
             bot.replyMessage(event.replyToken, {
               type: "text",
-              text: "何かお困りでしょうか？ 質問/要望/不具合に関する報告 などなどご自由にどうぞ！"
+              text: "誕生月を入力してください(1～12を数字のみで)"
             });
+
+            profileSetting[userId] = 0;
+
+          }　else if (profileSetting[userId] = 0){
+
+            
+
           }
+
+        }
 
         } else {
           bot.replyMessage(event.replyToken, {
